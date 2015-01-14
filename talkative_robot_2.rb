@@ -5,7 +5,7 @@
 # gender = gets.chomp
 # puts "Ok, how old are you?"
 # age  = gets.chomp.to_i
-grocery_list = Array.new
+grocery_list = []
 grocery_list = ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
 								"Paper Towels", "Diapers"]
 
@@ -28,7 +28,7 @@ def get_age
 	return age
 end	
 
-user = Hash.new
+user = {}
 user = {
 	name: get_name,
 	gender: get_gender,
@@ -68,13 +68,13 @@ def over_55?(age)
 	return age > 55
 end
 
-if user[:age].to_i > 55
+if over_55?(user[:age])
 	grandparent = male?(user[:gender]) ? "grandfather" : "grandmother"
 	puts "Are you a #{grandparent}? [Y/N]"
 	spawn = gets.chomp.capitalize
 	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
 
-elsif user[:age].to_i < 18
+elsif under_18?(user[:age])
 	gender_informal = male?(user[:gender]) ? "boy" : "girl"
 	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]"
 	study = gets.chomp.capitalize
