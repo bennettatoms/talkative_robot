@@ -5,6 +5,11 @@
 # gender = gets.chomp
 # puts "Ok, how old are you?"
 # age  = gets.chomp.to_i
+grocery_list = Array.new
+grocery_list = ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
+								"Paper Towels", "Diapers"]
+
+
 def get_name
 	puts "Hi, what's your name?"
 	name = gets.chomp.capitalize
@@ -23,9 +28,18 @@ def get_age
 	return age
 end	
 
-user_name = get_name
-user_gender = get_gender
-user_age = get_age
+user = Hash.new
+user = {
+	name: get_name,
+	gender: get_gender,
+	age: get_age,
+	grocery_list: ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
+								"Paper Towels", "Diapers"]
+}
+
+# user_name = get_name
+# user_gender = get_gender
+# user_age = get_age
 
 # if age > 55
 # 	greeting = gender == "M" ? "grandfather" : "grandmother"
@@ -54,24 +68,43 @@ def over_55?(age)
 	return age > 55
 end
 
-if user_age > 55
-	grandparent = male?(user_gender) && over_55?(user_age) ? "grandfather" : "grandmother"
+if user[:age].to_i > 55
+	grandparent = male?(user[:gender]) ? "grandfather" : "grandmother"
 	puts "Are you a #{grandparent}? [Y/N]"
 	spawn = gets.chomp.capitalize
 	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
 
-elsif user_age < 18
-	gender_informal = male?(user_gender) && under_18?(user_age) ? "boy" : "girl"
-	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]" if under_18?(user_age)
+elsif user[:age].to_i < 18
+	gender_informal = male?(user[:gender]) ? "boy" : "girl"
+	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]"
 	study = gets.chomp.capitalize
 	puts "I wish I could go to school like you." unless study == "N"
 
 else
-	greeting = male?(user_gender) && !under_18?(user_age) && !over_55?(user_age) ? "man" : "woman"
+	greeting = male?(user[:gender]) ? "man" : "woman"
 	pronoun = greeting == "man" ? "his" : "her"
 	puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
 
 end
+
+# if user_age > 55
+# 	grandparent = male?(user_gender) && over_55?(user_age) ? "grandfather" : "grandmother"
+# 	puts "Are you a #{grandparent}? [Y/N]"
+# 	spawn = gets.chomp.capitalize
+# 	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
+
+# elsif user_age < 18
+# 	gender_informal = male?(user_gender) && under_18?(user_age) ? "boy" : "girl"
+# 	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]" if under_18?(user_age)
+# 	study = gets.chomp.capitalize
+# 	puts "I wish I could go to school like you." unless study == "N"
+
+# else
+# 	greeting = male?(user_gender) && !under_18?(user_age) && !over_55?(user_age) ? "man" : "woman"
+# 	pronoun = greeting == "man" ? "his" : "her"
+# 	puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
+
+# end
 
 
 # case age
@@ -96,16 +129,38 @@ def years_till_75(age)
 end
 
 
-print years_till_75(user_age); puts "#{user_name}."
+print years_till_75(user[:age])
+puts "#{user[:name]}."
 
-# Add on to previous lab with:
-# Group previously defined if/else and case statements into methods
-# Have at least one method that does not need a param
-# Have at least one method that requires a param
 
-# Bonus
-# Create a boolean method (such as hungry?) -- Google for syntax/style
-# Make all your methods into 3 lines or less
+random_item = user[:grocery_list][rand(user[:grocery_list].count-1)]
+puts "Did you already grab the #{random_item}? [Y/N]"
+got_item = gets.chomp.capitalize
+if got_item == "Y"
+	puts "OK, let's remove #{random_item} from the list."
+	user[:grocery_list].delete(random_item)
+	puts user[:grocery_list]
+else
+	puts "Well, I'm sure you won't forget."
+end
+
+puts
+
+puts "Oh yeah, don't forget the bread!"
+user[:grocery_list].push("Bread")
+
+puts
+
+puts user[:grocery_list]
+
+
+# Create grocery_list array with 5+ items
+# Turn your user questions into a hash
+# Hint: Create user variable equal to a blank hash first, then put each key/value into that hash
+# Pick out a random off list
+# Print “Did you already grab the <random_item>?”
+# Remove from list if yes
+# Add new item to list “Oh yeah, don’t forget the bread!”
 
 # Bonus
 # In ~/ruby_scripts, create a file called strings.rb
