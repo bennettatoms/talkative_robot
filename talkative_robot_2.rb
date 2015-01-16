@@ -1,14 +1,4 @@
-# puts "Hi, what's your name?"
-# name = gets.chomp
-
-# puts "What is your gender [MF]?" # Experiment with using print instead of puts
-# gender = gets.chomp
-# puts "Ok, how old are you?"
-# age  = gets.chomp.to_i
-grocery_list = []
-grocery_list = ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
-								"Paper Towels", "Diapers"]
-
+require 'pry'
 
 def get_name
 	puts "Hi, what's your name?"
@@ -19,185 +9,199 @@ end
 def get_gender
 	puts "Are you male or female? [M/F]"
 	gender = gets.chomp.capitalize
+	until gender == "M" || gender == "F"
+		puts "Are you male or female? [M/F]"
+		gender = gets.chomp.capitalize
+	end
 	return gender
 end	
 
 def get_age
 	puts "And your age?"
 	age = gets.chomp.to_i
+	until age > 0
+		puts "Please enter a positive number for your age:"
+		age = gets.chomp.to_i
+	end
 	return age
 end	
 
-user = {}
 user = {
-	name: get_name,
-	gender: get_gender,
-	age: get_age,
-	grocery_list: ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
-								"Paper Towels", "Diapers"]
+					name: get_name,
+				gender: get_gender,
+					 age: get_age,
 }
 
-# user_name = get_name
-# user_gender = get_gender
-# user_age = get_age
+user_shop_list = ["Salad Stuff", "Milk", "Bottled Water", "Eggs", "Ice Cream", 
+									"Paper Towels", "Diapers"]
 
-# if age > 55
-# 	greeting = gender == "M" ? "grandfather" : "grandmother"
-# 	puts "Are you a #{greeting}? [Y/N]"
-# 	spawn = gets.chomp
-# 	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
-# elsif age < 18
-# 	greeting = gender == "M" ? "boy" : "girl"
-# 	puts "You're a young #{greeting}! Are you still in school? [Y/N]"
-# 	study = gets.chomp
-# 	puts "I wish I could go to school like you." unless study == "N"
-# else 
-# 	greeting 	= gender == "M" ? "man" : "woman"
-# 	pronoun 	= gender == "M" ? "his" : "her"
-# 	puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
-# end
+
 def male?(gender)
-	gender == "M" || gender == "Male"
+	gender == "M" || gender == "m" || gender == "Male" || gender == "male"
 end
 
+
+
 def under_18?(age)
-	return age < 18
+	age < 18
 end
 
 def over_55?(age)
-	return age > 55
+	age > 55
 end
 
-if over_55?(user[:age])
-	grandparent = male?(user[:gender]) ? "grandfather" : "grandmother"
-	puts "Are you a #{grandparent}? [Y/N]"
-	spawn = gets.chomp.capitalize
-	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
-
-elsif under_18?(user[:age])
-	gender_informal = male?(user[:gender]) ? "boy" : "girl"
-	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]"
-	study = gets.chomp.capitalize
-	puts "I wish I could go to school like you." unless study == "N"
-
-else
-	greeting = male?(user[:gender]) ? "man" : "woman"
-	pronoun = greeting == "man" ? "his" : "her"
-	puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
-
-end
-
-# if user_age > 55
-# 	grandparent = male?(user_gender) && over_55?(user_age) ? "grandfather" : "grandmother"
-# 	puts "Are you a #{grandparent}? [Y/N]"
-# 	spawn = gets.chomp.capitalize
-# 	puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
-
-# elsif user_age < 18
-# 	gender_informal = male?(user_gender) && under_18?(user_age) ? "boy" : "girl"
-# 	puts "You're a young #{gender_informal}! Are you still in school? [Y/N]" if under_18?(user_age)
-# 	study = gets.chomp.capitalize
-# 	puts "I wish I could go to school like you." unless study == "N"
-
-# else
-# 	greeting = male?(user_gender) && !under_18?(user_age) && !over_55?(user_age) ? "man" : "woman"
-# 	pronoun = greeting == "man" ? "his" : "her"
-# 	puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
-
-# end
-
-
-# case age
-# when 0..75
-# 	puts "You'll be 75 in #{75 - age} years, #{name}."
-# when 75
-# 	puts "Wow! You're 75, #{name}!"
-# when 76..150
-# 	puts "You were 75 #{age - 75} years ago, #{name}."
-# end
-
-def years_till_75(age)
-	if age < 75
-		years = (75 - age) 
-		print "You'll be 75 in #{years} years, "
-	elsif age > 75
-		years = (age - 75)
-		print "You were 75 #{years} years ago, "
+def address_person(user)
+  if over_55?(user[:age])
+  	grandparent = male?(user[:gender]) ? "grandfather" : "grandmother"
+  	puts "Are you a #{grandparent}? [Y/N]"
+		spawn = gets.chomp.capitalize
+		puts "Aww, congratulations on your big genetic footprint!" if spawn == "Y"
+	elsif under_18?(user[:age])
+		gender_informal = male?(user[:gender]) ? "boy" : "girl"
+		puts "You're a young #{gender_informal}! Are you still in school? [Y/N]"
+		study = gets.chomp.capitalize
+		puts "I wish I could go to school like you." unless study == "N"
 	else
-		print "You're 75! Quite the milestone, "
+		greeting = male?(user[:gender]) ? "man" : "woman"
+		pronoun = greeting == "man" ? "his" : "her"
+		puts "It must be nice to be a #{greeting} who looks younger than #{pronoun} age!"
 	end
 end
 
+address_person(user)
 
-print years_till_75(user[:age])
-puts "#{user[:name]}."
+def years_till_75(user)
+	milestone = 75
+	age 			= user[:age]
+	age_delta = (milestone - age).abs
+	if    age < milestone
+		print "You'll be 75 in #{age_delta} years, #{user[:name]}."
+	elsif age > milestone
+		print "You were 75 #{age_delta} years ago, #{user[:name]}."
+	elsif age == milestone
+		print "You're 75! Quite the milestone, #{user[:name]}."
+	end
+end
+
+puts years_till_75(user)
+
+def robot_terror_scale
+	puts "On a scale of 1 - 10, with 1 being the least, how afraid of robots are you?"
+	terror = gets.chomp.to_i
+	puts "You should be at more like a #{terror * 10}. I moonlight as an assassin."
+end
+
+robot_terror_scale
+puts "<press enter... if you dare>"
+gets
+assassin_weapons = [ "mind-controlled animals", "folk art", "drinking straws", 
+										 "cummerbunds and other formal wear",	"taco shells (hard, of course)" ]
+
+assassin_weapons.each { |item| puts "I've taken out bad guys with #{item}."}
 
 
-random_item = user[:grocery_list][rand(user[:grocery_list].count-1)]
-puts "Did you already grab the #{random_item}? [Y/N]"
-got_item = gets.chomp.capitalize
-if got_item == "Y"
+puts "The list goes on. And speaking of going on the list, 
+			I might need some #{assassin_weapons[2]} from the store."
+user_shop_list << assassin_weapons[2]
+puts
+
+def reminder_to_grab_item(item)
+	puts "Did you already grab the #{item}? [Y/N]"
+end
+
+random_item = user_shop_list.sample
+reminder_to_grab_item(random_item)
+got_it = gets.chomp.capitalize
+if got_it == "Y"
 	puts "OK, let's remove #{random_item} from the list."
-	user[:grocery_list].delete(random_item)
-	puts user[:grocery_list]
+	user_shop_list.delete(random_item)
+	puts user_shop_list
 else
 	puts "Well, I'm sure you won't forget."
 end
 
-puts
+puts"<press enter>"
+gets
 
 puts "Oh yeah, don't forget the bread!"
-user[:grocery_list].push("Bread")
+user_shop_list.push("Bread")
 
-puts
+require 'csv'
+index = 0
+CSV.open("user_shop_list.csv", "w") do |csv| 
+  csv << ["Item number", "Item"]  			# ==> first row, so make headers
+  while index < user_shop_list.count
+  	# csv << ["Item number", "Item"]		# ==> subsequent lines iterate through til array ends
+  	csv << ["#{index + 1}", "#{user_shop_list[index]}"]
+  	index += 1
+	end
+end
+grocery_pull = CSV.read("user_shop_list.csv")
+grocery_pull.shift
 
-puts user[:grocery_list]
+revised_shop_list = []
+index = 0
+while index < grocery_pull.count
+	revised_shop_list << grocery_pull[index][1]
+	index += 1
+end
+revised_shop_list << "Newest Issue of 'O' Magazine"
+revised_shop_list << "Funyuns"
 
+revised_shop_list.each_with_index do |item, index|
+	if index <= 10
+		puts "0#{index +1} -- #{item}"
+		index += 1
+	elsif index > 10 && index <= 20
+		puts "1#{index +1} -- #{item}"
+		index += 1
+	end
+end
 
-# Create grocery_list array with 5+ items
-# Turn your user questions into a hash
-# Hint: Create user variable equal to a blank hash first, then put each key/value into that hash
-# Pick out a random off list
-# Print “Did you already grab the <random_item>?”
-# Remove from list if yes
-# Add new item to list “Oh yeah, don’t forget the bread!”
+index = 0
+CSV.open("revised_shop_list.csv", "w") do |csv| 
+  csv << ["Item number", "Item"]  			# ==> first row, so make headers
+  while index < revised_shop_list.count
+  	# csv << ["Item number", "Item"]		# ==> subsequent lines iterate through til array ends
+  	csv << ["#{index + 1}", "#{revised_shop_list[index]}"]
+  	index += 1
+	end
+end
 
-# Bonus
-# In ~/ruby_scripts, create a file called strings.rb
-# Go through the entire Ruby doc on strings and practice each method
+# IO.write("groc_list.txt", user_shop_list.join("\n"))
 
+# user_groceries = IO.read("groc_list.txt").split("\n")
 
-
-
-
-
-
-
-# if name == "Ernest" 
-# 	puts "I knew it was you!"
-# else 
-# 	puts "Sorry, you’re not Ernest."
+# 3.times do
+# 	user_groceries.shift
 # end
 
-# puts "Hi, #{name}, who is #{age} years old."
-# first_initial = name.chars.first.capitalize
-# puts "Do you mind if I call you #{first_initial}?"
-# puts "You will be 75 years old in #{(75 - age.to_i)} years."
-# name.upcase! # ! vs not-!
-# puts "Hey, #{name}, where are you going!?"
+# user_groceries << "Newest Issue of 'O' Magazine"
+# user_groceries << "Funyuns"
 
-# puts "Hey, \"Dude\", what's up?"
- 
-# Print a message based off age
-# Using in-line if
-# Using in-line unless
-# if/else
-# Case (if < 75 “You’ll be 75 in x years”, == 75 (you’re 75!), > 75 “You turned 75 y years ago”)
-# Display messages based on both age and gender
-# “You are a young boy/girl.”
-# “Are you a great-great grandmother/father?” (make sure age is very high!)
-# Add a ternary operator somewhere
+# # binding.pry
+# user_groceries.each_with_index do |item, index|
+# 	if index <= 10
+# 		puts "0#{index +1} -- #{item}"
+# 		index += 1
+# 	elsif index > 10 && index <= 20
+# 		puts "1#{index +1} -- #{item}"
+# 		index += 1
+# 	end
+# end
+
+# new_user_shop_list = user_groceries.join(", ")
+# IO.write("new_user_shop_list.txt", new_user_shop_list)
+# # binding.pry
 
 
-# puts "Wow, you don't look your age." if age > 50
-# puts "Boy, you look so young." unless age < 21
+author = { name: "Bennett", gender: "M",  age: 34 }
+
+people = [user, author]
+
+
+def select_by_name(people, name)
+	people.select { |person| person[:name] == name }
+end
+# binding.pry
+puts select_by_name(people, "Bennett")
