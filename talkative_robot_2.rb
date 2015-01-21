@@ -4,7 +4,6 @@ require "./user"
 require "./author"
 require "./grocery_list"
 
-
 name   = User.get_name
 gender = User.get_gender
 age    = User.get_age
@@ -19,7 +18,6 @@ assassin_weapons = [ "mind-controlled animals", "folk art", "drinking straws",
 										 "cummerbunds and other formal wear",	"taco shells (hard, of course)" ]
 
 assassin_weapons.each { |item| puts "I've taken out bad guys with #{item}."}
-
 
 print "The list goes on. And speaking of going on the list, "
 puts "I might need some #{assassin_weapons[2]} from the store."
