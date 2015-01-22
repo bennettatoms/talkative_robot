@@ -28,11 +28,11 @@ class User < Person
     milestone = 75
     age_delta = (milestone - @age).abs
     if    @age < milestone
-      print "You'll be 75 in #{age_delta} years, #{@name}."
+      "You'll be 75 in #{age_delta} years, #{@name}."
     elsif @age > milestone
-      print "You were 75 #{age_delta} years ago, #{@name}."
+      "You were 75 #{age_delta} years ago, #{@name}."
     elsif @age == milestone
-      print "You're 75! Quite the milestone, #{@name}."
+      "You're 75! Quite the milestone, #{@name}."
     end
   end
 

@@ -52,14 +52,14 @@ class Person
   end 
 
   def male?
-    @gender == "male"
+    gender == "male" || gender == "M"
   end   
 
   def under_18?
-    @age < 18
+    age < 18
   end
 
   def over_55?
-    @age > 55
+    age > 55
   end
 end 
