@@ -2,13 +2,12 @@ require 'pry'
 
 class Person
   
-  attr_accessor :name, :gender, :age, :groceries, :terror
+  attr_accessor :name, :gender, :age, :terror
   
   def initialize(args)
     @name         = args[:name]   || "Burt"
     @gender       = args[:gender] || "male"
     @age          = args[:age]    || 0
-    @groceries    = nil
     @terror       = 0
   end
 
@@ -24,12 +23,6 @@ class Person
     until gender == "M" || gender == "F"
       puts "Are you male or female? [M/F]"
       gender = gets.chomp.capitalize
-    end
-    case 
-    when gender == "M"
-      @gender = "male"
-    when gender == "F"
-      @gender = "female"  
     end
     return @gender
   end 

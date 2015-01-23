@@ -1,3 +1,5 @@
+require_relative './person'
+
 class User < Person
   
   attr_accessor :name, :gender, :age, :groceries

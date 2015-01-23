@@ -1,8 +1,8 @@
 require 'pry'
-require "./person"
-require "./user"
-require "./author"
-require "./grocery_list"
+require "./lib/person"
+require "./lib/user"
+require "./lib/author"
+require "./lib/grocery_list"
 
 name   = User.get_name
 gender = User.get_gender

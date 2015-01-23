@@ -1,4 +1,4 @@
-require 'spec_helper'
+require_relative './spec_helper'
 require_relative '../lib/person'
 
 
@@ -30,11 +30,12 @@ describe Person do
    
     context "is a guy" do
       let(:person_g) { Person.new(gender: "giraffe") }
-      let(:person_z) { Person.new(gender: 812) }
-      
+      let(:person_z) { Person.new(gender: 812)       }
+      let(:sym)      { Person.new(gender: "%#^FRX")   }
       it "is false" do
         expect( person_g.male? ).to be_falsey
         expect( person_z.male? ).to be_falsey
+        expect( sym.male? ).to be_falsey
       end
     end
   end

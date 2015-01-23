@@ -1,9 +1,11 @@
+require_relative './person'
+
 class Author < Person
 
   attr_reader :name, :gender, :age
 
   def initialize(args)
-    super
+    super(args)
     @name   = "Bennett"
     @gender = "male"
     @age    = 34
