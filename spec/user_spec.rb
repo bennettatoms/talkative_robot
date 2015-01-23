@@ -1,6 +1,7 @@
 require 'spec_helper'
 require_relative '../lib/user'
 
+
 describe User do
   describe "male?" do
     context "is a guy" do
@@ -77,5 +78,3 @@ describe User do
     end
   end
 end
-
-
