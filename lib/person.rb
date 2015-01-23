@@ -52,7 +52,7 @@ class Person
   end 
 
   def male?
-    gender == "male" || gender == "M"
+    gender == "male" || gender == "M" || gender == "m" || gender == "Male"
   end   
 
   def under_18?
